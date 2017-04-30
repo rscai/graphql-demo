@@ -1,3 +1,7 @@
+plugins {
+    id 'org.springframework.boot' version '1.5.3.RELEASE'
+}
+
 group 'me.raymondai'
 version '1.0.0'
 
@@ -11,5 +15,19 @@ repositories {
 }
 
 dependencies {
+    compile 'com.graphql-java:graphql-spring-boot-starter:3.1.0'
+    // to embed GraphiQL tool
+    compile 'com.graphql-java:graphiql-spring-boot-starter:3.1.0'
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:1.5.3.RELEASE"
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+idea {
+    module {
+        // if you hate browsing Javadoc
+        downloadJavadoc = false
+
+        // and love reading sources :)
+        downloadSources = true
+    }
 }

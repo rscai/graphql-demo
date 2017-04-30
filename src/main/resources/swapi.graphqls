@@ -1,0 +1,35 @@
+type Query {
+    hero(episode: Episode): Actor @doc(d: "If episode omitted, returns the hero of the whole saga. If provided, returns the hero of that particular episode")
+    human(id: String!): Human @doc(d: "Find human by id")
+    droid(id: String!): Droid @doc(d: "Find droid by id")
+    actor(id: String!): Actor @doc(d: "Find actor by id")
+}
+
+enum Episode @doc(d: "One of the films in the Star Wars Trilogy") {
+    NEWHOPE @doc(d: "Released in 1977"),
+    EMPIRE @doc(d: "Released in 1980"),
+    JEDI @doc(d: "Released in 1983")
+}
+
+interface Actor @doc(d: "A actor in the Star Wars Trilogy") {
+    id: String! @doc(d: "The id of the actor"),
+    name: String @doc(d: "The name of the actor"),
+    friends: [Actor] @doc(d: "The friends of the actor, or an empty list if they have none"),
+    appearsIn: [Episode] @doc(d: "Which movies they appear in"),
+}
+
+type Human implements Actor @doc(d: "A humanoid creature in the Star Wars universe") {
+    id: String! @doc(d: "The id of the human"),
+    name: String @doc(d: "The name of the human"),
+    friends: [Actor] @doc(d: "The friends of the human, or an empty list if they have none"),
+    appearsIn: [Episode] @doc(d: "Which movies they appear in"),
+    homePlanet: String @doc(d: "The home planet of the human, or null if unknown"),
+}
+
+type Droid implements Actor @doc(d: "A mechanical creature in the Star Wars universe") {
+    id: String! @doc(d: "The id of the droid"),
+    name: String @doc(d: "The name of the droid"),
+    friends: [Actor] @doc(d: "The friends of the droid, or an empty list if they have none"),
+    appearsIn: [Episode] @doc(d: "Which movies they appear in"),
+    primaryFunction: String @doc(d: "The primary function of the droid"),
+}
