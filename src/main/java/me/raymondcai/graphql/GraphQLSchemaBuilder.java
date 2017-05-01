@@ -1,11 +1,10 @@
-package org.crygier.graphql;
+package me.raymondcai.graphql;
 
 import graphql.Scalars;
 import graphql.schema.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
-import org.crygier.graphql.annotation.SchemaDocumentation;
-import org.crygier.graphql.annotation.GraphQLIgnore;
+import me.raymondcai.graphql.annotation.SchemaDocumentation;
+import me.raymondcai.graphql.annotation.GraphQLIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

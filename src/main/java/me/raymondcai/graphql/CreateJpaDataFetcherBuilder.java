@@ -1,7 +1,5 @@
-package org.crygier.graphql;
+package me.raymondcai.graphql;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.persistence.EntityManager;

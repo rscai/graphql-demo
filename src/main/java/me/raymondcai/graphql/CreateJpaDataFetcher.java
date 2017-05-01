@@ -1,10 +1,9 @@
-package org.crygier.graphql;
+package me.raymondcai.graphql;
 
 
 import graphql.language.Argument;
 import graphql.language.Field;
 import graphql.schema.DataFetchingEnvironment;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -14,18 +13,11 @@ import org.springframework.transaction.support.TransactionTemplate;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import javax.persistence.metamodel.Attribute;
 import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.PluralAttribute;
-import javax.persistence.metamodel.SingularAttribute;
-import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
 public class CreateJpaDataFetcher extends JpaDataFetcher {
     private PlatformTransactionManager transactionManager;
     public CreateJpaDataFetcher(PlatformTransactionManager transactionManager,EntityManager entityManager, EntityType<?> entityType) {

@@ -1,4 +1,4 @@
-package org.crygier.graphql;
+package me.raymondcai.graphql;
 
 
 import javax.persistence.EntityManager;

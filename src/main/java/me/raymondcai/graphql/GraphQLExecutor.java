@@ -1,4 +1,4 @@
-package org.crygier.graphql;
+package me.raymondcai.graphql;
 
 import graphql.ExecutionResult;
 import graphql.GraphQL;
