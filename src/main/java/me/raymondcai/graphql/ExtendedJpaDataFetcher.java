@@ -72,7 +72,7 @@ public class ExtendedJpaDataFetcher extends JpaDataFetcher {
     }
 
     private PageInformation extractPageInformation(DataFetchingEnvironment environment, Field field) {
-        Optional<Argument> paginationRequest = field.getArguments().stream().filter(it -> GraphQLSchemaBuilder.PAGINATION_REQUEST_PARAM_NAME.equals(it.getName())).findFirst();
+        Optional<Argument> paginationRequest = field.getArguments().stream().filter(it -> GraphQLSchemaBuilderImpl.PAGINATION_REQUEST_PARAM_NAME.equals(it.getName())).findFirst();
         if (paginationRequest.isPresent()) {
             field.getArguments().remove(paginationRequest.get());
 

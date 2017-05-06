@@ -1,15 +1,15 @@
 spring:
     datasource:
-        url: jdbc:mysql://192.168.56.101:6603/test
-        username: root
-        password: rootpasswd
-        driverClass: com.mysql.cj.jdbc.Driver
+        url: jdbc:h2:~/test.h2
+        username: sa
+        password: sa
+        driverClass: org.h2.Driver
     jpa:
-        database: MYSQL
+        database: H2
         show-sql: true
         hiebernate:
             ddl-auto: update
             naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
         properties:
             hibernate:
-                dialect: org.hibernate.dialect.MySQL5Dialect
+                dialect: org.hibernate.dialect.H2Dialect
