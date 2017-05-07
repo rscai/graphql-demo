@@ -3,6 +3,7 @@ package me.raymondcai.graphql.schema;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class GraphQLSchemaBuilder {
@@ -32,17 +33,36 @@ public class GraphQLSchemaBuilder {
     }
 
     public GraphQLSchema build() {
+        
+
+        GraphQLSchema.Builder schemaBuilder = GraphQLSchema.newSchema();
+        schemaBuilder.query(buildQuery());
+        schemaBuilder.mutation(buildMutation());
+        
+        return schemaBuilder.build();
+    }
+    
+    protected GraphQLObjectType buildQuery(){
         // build Query
         GraphQLObjectType.Builder queryType = GraphQLObjectType.newObject()
                 .name("QueryType_JPA")
                 .description("All encompassing schema for this JPA environment");
         queryType.fields(queryObjectTypeFinder.list()
-                .map(javaType -> queryObjectTypeBuilder.build(javaType))
+                .map(javaType -> queryObjectTypeBuilder.build(javaType)).flatMap(List::stream)
                 .collect(Collectors.toList()));
-
-        GraphQLSchema.Builder schemaBuilder = GraphQLSchema.newSchema();
-        schemaBuilder.query(queryType.build());
         
-        return schemaBuilder.build();
+        return queryType.build();
+    }
+    
+    protected GraphQLObjectType buildMutation(){
+        // build Mutation
+        GraphQLObjectType.Builder mutationType = GraphQLObjectType.newObject()
+                .name("MutationType_JPA")
+                .description("Mutation");
+        mutationType.fields(mutationObjectTypeFinder.list().map(javaType->mutationObjectTypeBuilder.build(javaType))
+                .flatMap(List::stream)
+                .collect(Collectors.toList()));
+        
+        return mutationType.build();
     }
 }

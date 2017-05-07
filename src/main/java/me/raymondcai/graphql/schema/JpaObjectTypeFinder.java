@@ -11,7 +11,7 @@ public class JpaObjectTypeFinder implements ObjectTypeFinder {
     }
 
     @Override
-    public Stream<Class> list() {
+    public Stream<Class<?>> list() {
         return entityManager.getMetamodel()
                 .getEntities()
                 .stream()

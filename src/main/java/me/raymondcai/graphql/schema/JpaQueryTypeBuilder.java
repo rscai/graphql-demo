@@ -28,17 +28,17 @@ public class JpaQueryTypeBuilder implements GraphQLObjectTypeBuilder {
     private static final Logger log = LoggerFactory.getLogger(JpaQueryTypeBuilder.class);
     public static final String PAGINATION_REQUEST_PARAM_NAME = "paginationRequest";
 
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     public JpaQueryTypeBuilder(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
-    public GraphQLFieldDefinition build(Class<?> javaType) {
+    public List<GraphQLFieldDefinition> build(Class<?> javaType) {
         final EntityType<?> entityType = entityManager.getMetamodel().entity(javaType);
         
-        return GraphQLFieldDefinition.newFieldDefinition()
+        return Arrays.asList(GraphQLFieldDefinition.newFieldDefinition()
                 .name(start2Lowercase(entityType.getName()))
                 .description(getSchemaDocumentation(entityType.getJavaType()))
                 .type(new GraphQLList(getObjectType(entityType)))
@@ -49,7 +49,8 @@ public class JpaQueryTypeBuilder implements GraphQLObjectTypeBuilder {
                         .filter(this::isNotIgnored)
                         .map(this::getArgument)
                         .collect(Collectors.toList()))
-                .build();
+                .build()
+        );
     }
 
     protected GraphQLFieldDefinition getQueryFieldPageableDefinition(EntityType<?> entityType) {
@@ -97,10 +98,14 @@ public class JpaQueryTypeBuilder implements GraphQLObjectTypeBuilder {
 
         throw new IllegalArgumentException("Attribute " + attribute + " cannot be mapped as an Input Argument");
     }
+    
+    protected GraphQLObjectType getObjectType(EntityType<?> entityType){
+        return getObjectType(entityType,entityType.getName());
+    }
 
-    protected GraphQLObjectType getObjectType(EntityType<?> entityType) {
+    protected GraphQLObjectType getObjectType(EntityType<?> entityType, final String name) {
         return GraphQLObjectType.newObject()
-                .name(entityType.getName())
+                .name(name)
                 .description(getSchemaDocumentation(entityType.getJavaType()))
                 .fields(entityType.getAttributes()
                         .stream()

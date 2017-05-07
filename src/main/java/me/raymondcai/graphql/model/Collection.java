@@ -1,14 +1,18 @@
 package me.raymondcai.graphql.model;
 
+import graphql.annotations.GraphQLField;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Collection {
     @Id
+    @GraphQLField
     private Long id;
     
     @Column
+    @GraphQLField
     private String name;
     
     @OneToMany(fetch = FetchType.EAGER)

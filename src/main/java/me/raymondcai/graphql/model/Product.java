@@ -1,5 +1,7 @@
 package me.raymondcai.graphql.model;
 
+import graphql.annotations.GraphQLField;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,8 +10,10 @@ import javax.persistence.Id;
 public class Product {
     
     @Id
+    @GraphQLField
     private Long id;
     @Column
+    @GraphQLField
     private String name;
 
     public Long getId() {

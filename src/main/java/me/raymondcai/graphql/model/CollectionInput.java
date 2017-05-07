@@ -1,13 +1,15 @@
 package me.raymondcai.graphql.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "product")
-public class ProductInput {
+@Table(name="collection")
+public class CollectionInput {
     @Id
     private Long id;
-    
     @Column
     private String name;
 
@@ -26,5 +28,4 @@ public class ProductInput {
     public void setName(String name) {
         this.name = name;
     }
-    
 }
